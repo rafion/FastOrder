@@ -13,12 +13,13 @@ namespace FastOrder.Domain.Services
             _itemRepository = itemRepository;
         }
 
+
         public async Task<IEnumerable<Item>> GetAllAsync()
         {
             return await _itemRepository.GetAllAsync();
         }
 
-        public async Task<Item?> GetByIdAsync(int id)
+        public async Task<Item?> GetByIdAsync(Guid id)
         {
             return await _itemRepository.GetByIdAsync(id);
         }
@@ -58,7 +59,7 @@ namespace FastOrder.Domain.Services
             return await _itemRepository.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(Guid id)
         {
             var itemToDelete = await _itemRepository.GetByIdAsync(id);
             if (itemToDelete == null)

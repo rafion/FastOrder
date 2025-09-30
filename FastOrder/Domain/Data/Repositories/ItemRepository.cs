@@ -5,7 +5,7 @@ namespace FastOrder.Domain.Data.Repositories
 {
     //usando o generctRepository como herança e tendo acesso a todos os metodos
 
-    public class ItemRepository : GenericRepository<Item>, IItemRepository
+    public class ItemRepository : GenericRepository<Item, Guid>, IItemRepository
     {
         public ItemRepository(AppDbContext context) : base(context)
         {

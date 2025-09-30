@@ -5,7 +5,9 @@ namespace FastOrder.Domain.Models
 {
     public class Item
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
+
+        public int DisplayId { get; set; }
 
         [Required]
         [MaxLength(160)]
@@ -16,7 +18,7 @@ namespace FastOrder.Domain.Models
 
         public int StockQuantity { get; set; }
 
-        public ItemStatus Status { get; set; } = ItemStatus.Available;
+        public Status Status { get; set; } = Status.Available;
 
         public ItemType ItemType { get; set; } = ItemType.Product;
 

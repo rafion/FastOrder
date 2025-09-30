@@ -1,6 +1,6 @@
 ﻿namespace FastOrder.Domain.Models.Enums
 {
-    public enum ItemStatus
+    public enum Status
     {
         Available = 1,
         Unavailable = 2,

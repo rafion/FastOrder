@@ -14,6 +14,7 @@ namespace FastOrder.Domain.Data.Mapping
                 .IsRequired(true)
                 .HasMaxLength(160)
                 .HasColumnType("VARCHAR(160)");
+            builder.Property(x => x.Status).IsRequired();
         }
     }
 }

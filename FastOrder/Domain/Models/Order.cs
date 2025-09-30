@@ -7,6 +7,7 @@ namespace FastOrder.Domain.Models
     public class Order
     {
         public Guid Id { get; init; }
+        public DateTime OrderDate { get; set; }
 
         private OrderStatus _status;
         public string DisplayValue { get; private set; } //private para ser alterado apenas dentro da classe
@@ -21,6 +22,7 @@ namespace FastOrder.Domain.Models
         public Order(string displayValue)
         {
             Id = Guid.NewGuid();
+            OrderDate = DateTime.Now;
             Status = OrderStatus.New;
             CustomerName = string.Empty;
             DisplayValue = displayValue;

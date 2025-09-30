@@ -7,9 +7,9 @@ namespace FastOrder.Domain.Data.Repositories
     //desta forma limita quais metodos podem ser usados para essa classe
     public class UserRepository : IUserRepository
     {
-        private readonly IGenericRepository<User> _genericRepository;
+        private readonly IGenericRepository<User, Guid> _genericRepository;
 
-        public UserRepository(IGenericRepository<User> genericRepository)
+        public UserRepository(IGenericRepository<User, Guid> genericRepository)
         {
             _genericRepository = genericRepository;
         }

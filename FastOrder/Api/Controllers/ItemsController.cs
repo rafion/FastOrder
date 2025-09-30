@@ -28,7 +28,7 @@ namespace FastOrder.Api.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Item>> GetById(int id)
+        public async Task<ActionResult<ItemModel>> GetById(Guid id)
         {
             var product = await _itemService.GetByIdAsync(id);
 
@@ -37,7 +37,7 @@ namespace FastOrder.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(product.ToModel());
         }
 
         // POST: api/Products
@@ -64,7 +64,7 @@ namespace FastOrder.Api.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Item item)
+        public async Task<IActionResult> Update(Guid id, ItemInput item)
         {
             if (id != item.Id)
             {
@@ -76,7 +76,7 @@ namespace FastOrder.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            var success = await _itemService.UpdateAsync(item);
+            var success = await _itemService.UpdateAsync(item.ToDomainObject());
 
             if (!success)
             {
@@ -88,7 +88,7 @@ namespace FastOrder.Api.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var success = await _itemService.DeleteAsync(id);
 

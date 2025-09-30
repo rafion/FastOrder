@@ -2,19 +2,19 @@
 
 namespace FastOrder.Domain.Data.Repositories.Abstractions
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<TEntity, Tkey> where TEntity : class
     {
         // Consultas
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T?> GetByIdAsync(int id);
-        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity?> GetByIdAsync(Tkey id);
+        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
 
         // Comandos
-        Task AddAsync(T entity);
-        void Update(T entity);
-        void Remove(T entity);
+        Task AddAsync(TEntity entity);
+        void Update(TEntity entity);
+        void Remove(TEntity entity);
 
-        // Salva as mudanças pendentes (Unit of Work)
+        // Salva as mudanças pendentes, commit no context da requisição,  (Unit of Work)
         Task<int> SaveChangesAsync();
     }
 
