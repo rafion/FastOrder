@@ -5,16 +5,25 @@ namespace FastOrder.Domain.Models
 {
     public class Item
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; } //melhor para ordenação e paginação
 
-        public int DisplayId { get; set; }
+        public Guid ExternalId { get; set; } = Guid.NewGuid();
+
+        public string? Sku { get; set; }
 
         [Required]
         [MaxLength(160)]
         public required string Name { get; set; }
+        public string? Description { get; set; }
+        public string? Model { get; set; }
+        public string? Reference { get; set; }
+        public string? Ean { get; set; }
+        public required string Unit { get; set; } = "UND";
 
         [Range(0.01, 100000.00)]
         public decimal Price { get; set; }
+
+        public decimal CostPrice { get; set; }
 
         public int StockQuantity { get; set; }
 

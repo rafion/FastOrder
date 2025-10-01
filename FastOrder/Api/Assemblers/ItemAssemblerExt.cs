@@ -15,9 +15,16 @@ namespace FastOrder.Api.Assemblers
             {
                 Id = itemInput.Id,
                 Name = itemInput.Name,
+                Sku = itemInput.Sku,
                 Price = itemInput.Price,
+                CostPrice = itemInput.CostPrice,
+                Model = itemInput.Model,
+                Reference = itemInput.Reference,
+                Ean = itemInput.Ean,
                 StockQuantity = itemInput.StockQuantity,
                 Status = itemInput.Status,
+                Unit = itemInput.Unit,
+
 
             };
 
@@ -28,11 +35,16 @@ namespace FastOrder.Api.Assemblers
             return new ItemModel { 
                 Id = item.Id,
                 Name = item.Name,
+                Sku = item.Sku,
+                Reference = item.Reference,
+                Unit = item.Unit,
+                Model = item.Model,
                 Price = item.Price,
+                CostPrice = item.CostPrice,
                 StockQuantity = item.StockQuantity,
                 Status = item.Status,
-                StatusName = item.Status.GetDisplayName(),
                 ItemType = item.ItemType,
+                StatusName = item.Status.GetDisplayName(),
                 ItemTypeName = item.ItemType.GetDisplayName()
 
             };

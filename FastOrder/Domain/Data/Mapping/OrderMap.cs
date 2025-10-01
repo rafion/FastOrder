@@ -8,7 +8,7 @@ namespace FastOrder.Domain.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.ToTable("Order_");
+            builder.ToTable("Order");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.DisplayValue)

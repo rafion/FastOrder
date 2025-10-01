@@ -8,7 +8,7 @@ namespace FastOrder.Domain.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("User_");
+            builder.ToTable("User");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Username)

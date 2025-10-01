@@ -19,7 +19,7 @@ namespace FastOrder.Domain.Services
             return await _itemRepository.GetAllAsync();
         }
 
-        public async Task<Item?> GetByIdAsync(Guid id)
+        public async Task<Item?> GetByIdAsync(int id)
         {
             return await _itemRepository.GetByIdAsync(id);
         }
@@ -59,7 +59,7 @@ namespace FastOrder.Domain.Services
             return await _itemRepository.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var itemToDelete = await _itemRepository.GetByIdAsync(id);
             if (itemToDelete == null)

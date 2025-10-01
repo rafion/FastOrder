@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FastOrder.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250930024244_testess")]
-    partial class testess
+    [Migration("20251001030442_nova2")]
+    partial class nova2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,15 +90,31 @@ namespace FastOrder.Migrations
 
             modelBuilder.Entity("FastOrder.Domain.Models.Item", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("DisplayId")
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("CostPrice")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Ean")
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)");
+
+                    b.Property<Guid>("ExternalId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("ItemType")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Model")
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -106,13 +122,26 @@ namespace FastOrder.Migrations
                         .HasColumnType("VARCHAR(160)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Reference")
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR(50)");
+
+                    b.Property<string>("Sku")
+                        .HasMaxLength(14)
+                        .HasColumnType("VARCHAR(14)");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Unit")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("VARCHAR(6)");
 
                     b.HasKey("Id");
 
@@ -156,7 +185,7 @@ namespace FastOrder.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Order_", (string)null);
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("FastOrder.Domain.Models.OrderItem", b =>
@@ -216,7 +245,7 @@ namespace FastOrder.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("User_", (string)null);
+                    b.ToTable("User", (string)null);
                 });
 
             modelBuilder.Entity("FastOrder.Domain.Models.Category", b =>

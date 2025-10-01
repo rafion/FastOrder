@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FastOrder.Migrations
 {
     /// <inheritdoc />
-    public partial class testess : Migration
+    public partial class nova : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,10 +56,18 @@ namespace FastOrder.Migrations
                 name: "Item",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    DisplayId = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ExternalId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Sku = table.Column<string>(type: "VARCHAR(14)", maxLength: 14, nullable: true),
                     Name = table.Column<string>(type: "VARCHAR(160)", maxLength: 160, nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    Model = table.Column<string>(type: "VARCHAR(14)", maxLength: 14, nullable: true),
+                    Reference = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: true),
+                    Ean = table.Column<string>(type: "VARCHAR(14)", maxLength: 14, nullable: true),
+                    Unit = table.Column<string>(type: "VARCHAR(6)", maxLength: 6, nullable: false),
+                    Price = table.Column<decimal>(type: "numeric(18,2)", nullable: false),
+                    CostPrice = table.Column<decimal>(type: "numeric", nullable: false),
                     StockQuantity = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     ItemType = table.Column<int>(type: "integer", nullable: false)
@@ -70,7 +78,7 @@ namespace FastOrder.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order_",
+                name: "Order",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -85,11 +93,11 @@ namespace FastOrder.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order_", x => x.Id);
+                    table.PrimaryKey("PK_Order", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User_",
+                name: "User",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -99,7 +107,7 @@ namespace FastOrder.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User_", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,9 +127,9 @@ namespace FastOrder.Migrations
                 {
                     table.PrimaryKey("PK_OrderItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderItem_Order__OrderId",
+                        name: "FK_OrderItem_Order_OrderId",
                         column: x => x.OrderId,
-                        principalTable: "Order_",
+                        principalTable: "Order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -137,8 +145,8 @@ namespace FastOrder.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User__Email",
-                table: "User_",
+                name: "IX_User_Email",
+                table: "User",
                 column: "Email",
                 unique: true);
         }
@@ -159,10 +167,10 @@ namespace FastOrder.Migrations
                 name: "OrderItem");
 
             migrationBuilder.DropTable(
-                name: "User_");
+                name: "User");
 
             migrationBuilder.DropTable(
-                name: "Order_");
+                name: "Order");
         }
     }
 }

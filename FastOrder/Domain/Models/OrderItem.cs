@@ -2,7 +2,7 @@
 {
     public class OrderItem
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public required Guid OrderId { get; set; }
         public int Index { get; set; }
         public required string ProductName { get; set; } // como os itens são dinamicos, melhor registrar aqui
